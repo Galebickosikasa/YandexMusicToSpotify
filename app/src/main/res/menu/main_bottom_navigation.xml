@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="yandex_music"
+        android:id="@+id/yandex_music"
+        android:icon="@drawable/yandex_music" />
+
+    <item
+        android:title="spotify"
+        android:id="@+id/spotify"
+        android:icon="@drawable/spotify" />
+
+</menu>
