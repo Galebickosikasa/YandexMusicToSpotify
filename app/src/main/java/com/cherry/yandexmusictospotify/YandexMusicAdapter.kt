@@ -10,22 +10,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class YandexMusicAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val listItem = arrayListOf<YaMusicItem>()
-    lateinit var context : Context
+class YandexMusicAdapter (context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val listItem = arrayListOf<MusicItem>()
+    private var onYandexMusicClick: OnYandexMusicClick
+    private lateinit var c : Context
+
+    interface OnYandexMusicClick {
+        fun click (item : MusicItem)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from (parent.context).inflate (R.layout.ya_music_holder, parent, false)
-        context = parent.context
+        c = parent.context
         return YaMusicHolder (view)
     }
 
-    fun addItem (item : YaMusicItem) {
+    fun addItem (item : MusicItem) {
         listItem.add (item)
         notifyItemChanged (itemCount - 1)
     }
 
-    fun addItem (a : ArrayList<YaMusicItem>) {
+    fun addItem (a : ArrayList<MusicItem>) {
         for (x in a) listItem.add (x)
         notifyDataSetChanged ()
     }
@@ -49,11 +54,17 @@ class YandexMusicAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val image : ImageView = itemView.findViewById (R.id.image)
         val checkBox : CheckBox = itemView.findViewById (R.id.checkbox)
 
-        fun bind (item : YaMusicItem) {
+        fun bind (item : MusicItem) {
             title.text = item.title
             artists.text = item.name
-            Glide.with (context).load (item.uri).into (image)
+            Glide.with (c).load (item.uri).into (image)
+            checkBox.setOnClickListener {
+                onYandexMusicClick.click (listItem[adapterPosition])
+            }
         }
+    }
 
+    init {
+        onYandexMusicClick = context as OnYandexMusicClick
     }
 }

@@ -32,6 +32,14 @@ android {
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
     buildTypes {
         release {
@@ -50,6 +58,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha03'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation project(':spotify-app-remote-release-0.7.1')
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation 'com.spotify.android:auth:1.2.3'
+    implementation("com.squareup.okhttp3:okhttp:4.8.1")
+//    implementation files('../app/libs/spotify-auth-release-1.2.1.aar')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'

@@ -21,5 +21,3 @@ def our_func (user, password):
         a += '{' + title + ' ~ ' + name + ' ~ ' + uri + '}'
 
     return a
-
-# print (our_func ('glebkolyshev@yandex.ru', '#mitIScool'))

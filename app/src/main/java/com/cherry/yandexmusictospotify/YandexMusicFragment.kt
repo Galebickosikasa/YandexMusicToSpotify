@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,7 @@ class YandexMusicFragment : Fragment() {
         sp = activity!!.getSharedPreferences ("Password", Context.MODE_PRIVATE)
 
         recycler = container.findViewById (R.id.yandex_music_recycler)
-        adapter = YandexMusicAdapter ()
+        adapter = YandexMusicAdapter (activity!!)
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager (activity!!)
 
@@ -53,7 +52,7 @@ class YandexMusicFragment : Fragment() {
         MyTask ().execute ()
     }
 
-    fun lol (s : String) : YaMusicItem {
+    fun lol (s : String) : MusicItem {
         var title = ""
         var artists = ""
         var uri = ""
@@ -69,11 +68,11 @@ class YandexMusicFragment : Fragment() {
         ++i
         ++i
         while (i < s.length) uri += s[i++]
-        return YaMusicItem (title, artists, uri)
+        return MusicItem (title, artists, uri)
     }
 
-    fun kek (s : String) : ArrayList<YaMusicItem> {
-        val a : ArrayList<YaMusicItem> = arrayListOf ()
+    fun kek (s : String) : ArrayList<MusicItem> {
+        val a : ArrayList<MusicItem> = arrayListOf ()
         var i = 0
         var t = ""
         while (i < s.length) {
@@ -96,7 +95,7 @@ class YandexMusicFragment : Fragment() {
     }
 
     inner class MyTask : AsyncTask<Void, Void, Void>() {
-        var a : ArrayList<YaMusicItem> = arrayListOf ()
+        var a : ArrayList<MusicItem> = arrayListOf ()
         var flag = false
 
         override fun doInBackground(vararg params: Void?): Void? {
